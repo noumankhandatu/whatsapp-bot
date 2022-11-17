@@ -55,7 +55,7 @@ function CustomList() {
   };
 
   return (
-    <Paper style={{ width: "700px", padding: "15px" }}>
+    <Paper sx={{ padding: "15px", width: { sm: 500, md: 700, lg: 1000 } }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
           <Typography variant="h6">

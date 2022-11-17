@@ -1,28 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Wrapper from "./components/molecule/wrapper";
-import Home from "./pages";
-import Navbar from "./components/molecule/navbar";
+import React from "react";
+import PrivateRoutes from "./routes/privateRoutes";
+import ProtectedRoutes from "./routes/protectedRoutes";
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        {["/", "/home"].map((path, index) => (
-          <Route
-            key={index}
-            exact
-            path={path}
-            element={
-              <Wrapper>
-                <Home />
-              </Wrapper>
-            }
-          />
-        ))}
-      </Routes>
-    </Router>
+    <div>
+      <PrivateRoutes />
+    </div>
   );
-}
+};
 
 export default App;
