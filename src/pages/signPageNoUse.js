@@ -13,10 +13,14 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
+import { tokenAction } from "../redux/tokenSlice";
+
 const theme = createTheme();
 
-export default function SignIn() {
+function SignInNoUse() {
+  const dispatch = useDispatch();
   const [getValues, setValues] = React.useState({
     email: "",
     password: "",
@@ -25,8 +29,10 @@ export default function SignIn() {
     setValues({ ...getValues, [e.target.name]: e.target.value });
   };
 
-  const handleSignIn = async (event) => {
+  // redux
+  const handleSignIn = (event) => {
     event.preventDefault();
+    dispatch(tokenAction(true));
   };
   return (
     <ThemeProvider theme={theme}>
