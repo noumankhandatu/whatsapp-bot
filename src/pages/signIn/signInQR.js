@@ -47,7 +47,7 @@ export default function SignInQR() {
     dispatch(tokenAction(true));
   };
   return (
-    <div>
+    <Box sx={{ position: "relative" }}>
       <ToastContainer />
       <Box
         sx={{
@@ -117,9 +117,8 @@ export default function SignInQR() {
           allowfullscreen
         ></iframe>
       </Grid>
-      <Box></Box>
       {/* grey div */}
       <Box className={classes.grayBox}></Box>
-    </div>
+    </Box>
   );
 }

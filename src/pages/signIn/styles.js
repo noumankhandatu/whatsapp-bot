@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 export const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute ! important",
-    top: "70% ! important",
+    top: "50% ! important",
     left: "50% ! important",
     transform: "translate(-50%, -50%) ! important",
     width: "1000px !important",
@@ -11,12 +11,10 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "600px !important",
       padding: "40px ! important",
-      top: "100% ! important",
     },
     [theme.breakpoints.down("sm")]: {
       width: "300px !important",
       padding: "30px ! important",
-      top: "100% ! important",
     },
   },
   greenBox: {
@@ -49,8 +47,8 @@ export const useStyles = makeStyles((theme) => ({
   grayBox: {
     height: "100vh",
     backgroundColor: "#111B21",
-    [theme.breakpoints.down("md")]: {
-      height: "200vh",
+    [theme.breakpoints.down("sm")]: {
+      height: "160vh",
     },
   },
   h1: {
