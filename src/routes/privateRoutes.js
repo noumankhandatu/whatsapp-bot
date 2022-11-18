@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Wrapper from "../components/molecule/wrapper";
 import Navbar from "../components/molecule/navbar";
-import SignIn from "../pages/signInQR";
-import ErrorPage from "../pages/error";
+import SignIn from "../pages/signIn/signInQR";
+import ErrorPage from "../pages/error/error";
 
 function PrivateRoutes() {
   return (

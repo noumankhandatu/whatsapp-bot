@@ -4,7 +4,7 @@ import ProtectedRoutes from "./routes/protectedRoutes";
 import { useSelector } from "react-redux";
 const App = () => {
   const auth = useSelector((state) => state.tokenSlice);
-  return <>{true ? <ProtectedRoutes /> : <PrivateRoutes />}</>;
+  return <>{auth ? <ProtectedRoutes /> : <PrivateRoutes />}</>;
 };
 
 export default App;

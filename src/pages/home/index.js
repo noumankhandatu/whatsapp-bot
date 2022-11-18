@@ -1,6 +1,5 @@
-import { Typography } from "@mui/material";
 import React from "react";
-import CustomList from "../components/molecule/CustomList";
+import CustomList from "../../components/molecule/CustomList/index";
 
 const Home = () => {
   return (

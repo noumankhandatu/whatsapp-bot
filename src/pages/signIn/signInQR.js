@@ -3,19 +3,35 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import SettingsIcon from "@mui/icons-material/Settings";
 import "react-toastify/dist/ReactToastify.css";
-import { tokenAction } from "../redux/tokenSlice";
-import whatsappImage from "../assets/images/logo whatsapp png.png";
-import GenerateQRCode from "../components/molecule/QRCode";
-
-const theme = createTheme();
+import { tokenAction } from "../../redux/tokenSlice";
+import whatsappImage from "../../assets/images/logo whatsapp png.png";
+import GenerateQRCode from "../../components/molecule/QRCode";
+import { useStyles } from "./styles";
+import axios from "axios";
 
 export default function SignInQR() {
+  const [QRString, setQRString] = React.useState(null);
+  const fetchApi = async () => {
+    const getString = await axios.get("http://192.168.18.87:8003/getqr");
+    if (getString) {
+      setQRString(getString.data.qr);
+    }
+  };
+  console.log(QRString);
+  React.useEffect(() => {
+    fetchApi();
+  }, []);
+
+  // setInterval(() => {
+  //   fetchApi();
+  // }, 5000);
+
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [getValues, setValues] = React.useState({
     email: "",
@@ -31,7 +47,7 @@ export default function SignInQR() {
     dispatch(tokenAction(true));
   };
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <ToastContainer />
       <Box
         sx={{
@@ -41,14 +57,7 @@ export default function SignInQR() {
         }}
       >
         {/* image */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: "300px",
-            paddingTop: "40px",
-          }}
-        >
+        <Box className={classes.greenBox}>
           <img src={whatsappImage} width={40} alt="what's app image" />
           <Box width="20px"></Box>
           <Typography variant="body1" color="white">
@@ -57,74 +66,35 @@ export default function SignInQR() {
         </Box>
       </Box>
       {/* modal */}
-      <Grid
-        container
-        elevation={6}
-        component={Paper}
-        sx={{
-          width: 1000,
-          height: 1000,
-          padding: 10,
-          position: "absolute",
-          top: "70%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+      <Grid container elevation={6} component={Paper} className={classes.root}>
         {/* first Grid */}
-        <Grid item md={7}>
-          <Typography
-            color="#41525d"
-            sx={{ fontWeight: 300, fontSize: "28px" }}
-          >
+        <Grid item md={7} sm={12}>
+          <Typography className={classes.h1}>
             To use WhatsApp on your computer :
           </Typography>
 
           <ol>
             <li>
-              <Typography
-                color="#41525d"
-                sx={{ lineHeight: 5, fontSize: "18px" }}
-              >
+              <Typography className={classes.h2} sx={{ lineHeight: 5 }}>
                 Open WhatsApp on your phone :
               </Typography>
             </li>
             <li>
-              <Typography
-                color="#41525d"
-                sx={{ fontSize: "18px", display: "flex", alignItems: "center" }}
-              >
+              <div className={classes.h3}>
                 Tap Menu
-                <MoreVertIcon
-                  sx={{
-                    backgroundColor: "#F9F9FA",
-                    padding: "5px",
-                    ml: 1,
-                    mr: 1,
-                  }}
-                />
+                <MoreVertIcon className={classes.twinIcon} />
                 or Setting
-                <SettingsIcon
-                  sx={{
-                    backgroundColor: "#F9F9FA",
-                    padding: "5px",
-                    ml: 1,
-                    mr: 1,
-                  }}
-                />
+                <SettingsIcon className={classes.twinIcon} />
                 and select Linked Devices
-              </Typography>
+              </div>
             </li>
             <li>
-              <Typography
-                color="#41525d"
-                sx={{ lineHeight: 5, fontSize: "18px" }}
-              >
+              <Typography className={classes.h2} sx={{ lineHeight: 5 }}>
                 Tap on Link a Device :
               </Typography>
             </li>
             <li>
-              <Typography color="#41525d" sx={{ fontSize: "18px" }}>
+              <Typography className={classes.h2}>
                 Point your phone to this screen to capture the code:
               </Typography>
             </li>
@@ -135,12 +105,11 @@ export default function SignInQR() {
           </Typography>
         </Grid>
         {/* second Grid */}
-        <Grid item md={5} sx={{ textAlign: "center" }}>
-          <GenerateQRCode />
+        <Grid item md={5} sm={12} sx={{ textAlign: "center" }}>
+          <GenerateQRCode QRString={QRString} />
         </Grid>
         <iframe
-          width="800"
-          height="350"
+          className={classes.video}
           src="https://www.youtube.com/embed/FOw8-8w-DPw"
           title="YouTube video player"
           frameborder="0"
@@ -150,12 +119,7 @@ export default function SignInQR() {
       </Grid>
       <Box></Box>
       {/* grey div */}
-      <Box
-        sx={{
-          height: "100vh",
-          backgroundColor: "#111B21",
-        }}
-      ></Box>
-    </ThemeProvider>
+      <Box className={classes.grayBox}></Box>
+    </div>
   );
 }

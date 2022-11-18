@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Wrapper from "../components/molecule/wrapper";
-import Home from "../pages";
 import Navbar from "../components/molecule/navbar";
-
+import Home from "../pages/home/index";
 function ProtectedRoutes() {
   return (
     <Router>
